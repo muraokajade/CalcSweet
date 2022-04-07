@@ -2,39 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredients;
 use Illuminate\Http\Request;
 
 class IngController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $ingredients = Ingredients::all();
+
+        return view('ingredients.index', compact('ingredients'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $g_price = round($request->g_price,2);
+
+        Ingredients::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'weight' => $request->weight,
+            'g_price' => $g_price,
+            'p_date' => $request->p_date,
+            'p_camp' => $request->p_camp,
+        ]);
+
+        return redirect()->route('ingredients.index')
+        ->with(['message' => '材料を追加しました', 'status' => 'info']);
     }
 
     /**
