@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Ingredients;
 class RecipeController extends Controller
 {
 
@@ -14,8 +14,9 @@ class RecipeController extends Controller
 
     public function create()
     {
-
-        return view('recipe.create');
+        $ingredients = Ingredients::all();
+        // dd($ingredients);
+        return view('recipe.create', compact('ingredients'));
     }
 
     public function setCreate(Request $request) {

@@ -23,16 +23,21 @@
                         <div id="input" class="flex justify-around mt-5">
                             <input type="text" id="search" placeholder="検索">
                             <select placeholder="選択して下さい" id="ing_list" class="w-96" name="ing_name[]">
+                        @forelse($ingredients as $ingredient)
                                 <option value="">材料選択</option>
-                                <option value="牛乳">牛乳</option>
-                                <option value="小麦">小麦</option>
-                                <option value="砂糖">砂糖</option>
+                                <option value="{{$ingredient->id}}">{{$ingredient->name}}</option>
+                                
+                        @empty
+                        <p>材料が見つかりません</p>
+                        @endif
+                                
                             </select>
                             <input type="number" name="amount[]" placeholder="配合量">
+                            <button class="bg-gray-200">削除</button>
                         </div>
                         <div class="cloned"></div>
 
-                    <input type="number" name="number" placeholder="個数">
+                    <input type="number" name="number" placeholder="取れ数">
                     <button
                         class="text-white font-bold py-2 px-4 mt-5 uppercase rounded-3xl bg-green-500 hover:bg-green-600 shadow hover:shadow-lg  transition transform hover:-translate-y-0.5">作成
 
