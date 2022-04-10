@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cakes', function (Blueprint $table) {
+         Schema::create('cakes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('ingredient_id')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('ing_name');
+            $table->string('name');
+            $table->integer('amount');
+            $table->integer('number');
+            $table->double('raw_price',5,2);
             $table->timestamps();
         });
     }

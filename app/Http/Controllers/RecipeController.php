@@ -19,14 +19,13 @@ class RecipeController extends Controller
         return view('recipe.create', compact('ingredients'));
     }
 
-    public function setCreate(Request $request) {
 
-        return view('recipe.setCreate');
-    }
 
     public function store(Request $request)
     {
-        //
+        
+        
+        // dd($request);
     }
 
     /**
