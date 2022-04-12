@@ -22,7 +22,7 @@
                     
                     
                     <div id='ingredientsList' style='display:none'>{{ json_encode($ingredients) }}</div>
-                    <form action="{{ route('recipe.store') }}" method="post" id='recipe_form'>
+                    <form action="{{ route('recipes.store') }}" method="post" id='recipe_form'>
                         @csrf
 
                         <input type="text" name="name" placeholder="お菓子名"
@@ -34,7 +34,7 @@
                                 class="mt-1 w-96 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option selected>▼材料を選択してください</option>
                                 @forelse($ingredients as $ingredient)
-                                    <option value="{{ $ingredient->name }}">{{ $ingredient->name }}</option>
+                                    <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
 
                                 @empty
                                     <p>材料が見つかりません</p>
@@ -84,6 +84,7 @@
         const createSelectBox = () =>{
             //selectを作る
             let select = $('<select>');
+            select.attr('name','ing_name[]');
             select.addClass('mt-1 w-96 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50');
             let gradientsList = JSON.parse($('#ingredientsList').html());
             let options = createOptions();
@@ -113,6 +114,7 @@
             input.addClass('mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50');
             input.attr('type','number');
             input.attr('placeholder','配合量');
+            input.attr('name','amount[]');
             return input;
         }
         

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\IngController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CakeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Select2Dropdown;
 /*
@@ -24,7 +26,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::resource('/ingredients', IngController::class);
-Route::resource('/recipe', RecipeController::class);
-Route::get('/', Select2Dropdown::class);
+Route::resource('/recipes', RecipeController::class);
+Route::resource('/products', ProductController::class);
+Route::resource('/cakes', CakeController::class);
 
 require __DIR__.'/auth.php';

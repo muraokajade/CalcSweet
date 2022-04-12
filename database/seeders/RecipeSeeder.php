@@ -13,17 +13,30 @@ class RecipeSeeder extends Seeder
     {
          DB::table('recipes')->insert([
             [
-                'product_id' => 1,
-                'ingredient_id' => 2,
-                'amoount' => 200,
+                'cake_id' => 1,
+                'ingredient_id' => 1,
+                'name' => 'チョコ',
+                'amount' => 200,
+                // 'price'は要りません//リレーションでとってくる
  
             ],
             [
-                'product_id' => 2,
-                'ingredient_id' => 4,
-                'amoount' => 300,
+                'cake_id' => 2,
+                'ingredient_id' => 1,
+                'name' => 'チョコ',
+                'amount' => 200,
+                // 'price'は要りません//リレーションでとってくる
  
             ],
+            [
+                'cake_id' => 3,
+                'ingredient_id' => 1,
+                'name' => 'チョコ',
+                'amount' => 200,
+                // 'price'は要りません//リレーションでとってくる
+ 
+            ],
+           
             
         ]);
             

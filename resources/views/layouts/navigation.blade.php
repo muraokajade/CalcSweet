@@ -18,8 +18,11 @@
                     <x-nav-link :href="route('ingredients.index')" :active="request()->routeIs('ingredients.index')">
                         {{ __('原材料管理') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('recipe.index')" :active="request()->routeIs('recipe.index')">
+                    <x-nav-link :href="route('cakes.index')" :active="request()->routeIs('cakes.index')">
                         {{ __('商品一覧') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('recipes.index')" :active="request()->routeIs('recipes.index')">
+                        {{ __('レシピ管理') }}
                     </x-nav-link>
                 </div>
             </div>
