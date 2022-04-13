@@ -8,26 +8,28 @@ use Illuminate\Support\Facades\DB;
 
 class CakeSeeder extends Seeder
 {
-    
+
         public function run()
     {
          DB::table('cakes')->insert([
             [
                 'name' => 'ショートケーキ',
-                'price' => 300,
- 
+                'raw_price' => 300,
+                'number' => 30,
+
             ],
             [
                 'name' => 'チョコレートケーキ',
-                'price' => 300,
- 
+                'raw_price' => 300,
+                'number' => 20,
             ],
             [
                 'name' => '旭南オリジナル',
-                'price' => 300,
- 
+                'raw_price' => 300,
+                'number' => 10,
+
             ],
-           
-            
+
+
         ]);
 }}

@@ -17,19 +17,40 @@ class RecipeController extends Controller
 
     public function create()
     {
+        $cakes = Cake::all();
         $ingredients = Ingredients::all();
         // dd($ingredients);
-        return view('recipes.create', compact('ingredients'));
+        return view('recipes.create', compact('ingredients', 'cakes'));
     }
 
 
 
     public function store(Request $request)
     {
+        //新規登録
+        $cake = Cake::create([
+            'name' => $request->name,
+            'price' => 0, //ingから計算する
+            'number' => 0,
+        ]);
         
-        dd($request);
+        foreach($request->ing_id as $index=>$ing_id) {
+            //その後でrexipe登録
+            Recipe::create([
+                'cake_id' => $cake->id,
+                'ingredient_id' => $ing_id,
+                'name' => '',
+                'amount' => $request->amount[$index],
+            ]);
+        }
         
+        //priceを計算し、update
+        //トランザクション
         
+        $cake->update([
+            'price' => 0,
+        ]);
+
     }
 
     public function show($id)
@@ -37,35 +58,19 @@ class RecipeController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

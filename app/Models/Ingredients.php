@@ -11,8 +11,12 @@ class Ingredients extends Model
     use HasFactory;
 
     protected $fillable = ['name','price','weight','g_price', 'p_date','p_camp'];
-    
+
     public function cake() {
-        return $this->belongsTo(Cake::class);
+        return $this->belongsToMany(Cake::class,'recipes');
+    }
+
+    public function recipes() {
+        return $this->belongsTo(Recipe::class);
     }
 }

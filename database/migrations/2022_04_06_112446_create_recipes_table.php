@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ingredient_id');
             $table->string('name');
             $table->integer('amount');
+            // $table->integer('number');//後で計算
             $table->timestamps();
             $table->foreign('cake_id')->references('id')->on('cakes')->onDelete('cascade');
             $table->foreign('ingredient_id')->references('id')->on('ingredients')->onDelete('cascade');
