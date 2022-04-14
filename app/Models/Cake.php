@@ -10,7 +10,7 @@ use App\Models\Recipe;
 class Cake extends Model
 {
     use HasFactory;
-    protected $fillable = ['ingredient_id','ing_name','amount','number','raw_price'];
+    protected $fillable = ['name','ingredient_id','ing_name','amount','number','raw_price'];
 
     public function ingredients() {
         return $this->belongsToMany(Ingredients::class, 'recipes');

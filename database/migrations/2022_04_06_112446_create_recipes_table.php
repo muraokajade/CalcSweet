@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('cake_id');
             $table->unsignedBigInteger('ingredient_id');
-            $table->string('name');
+            // $table->string('name');
             $table->integer('amount');
             // $table->integer('number');//後で計算
             $table->timestamps();

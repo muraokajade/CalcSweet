@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ingredients;
 use App\Models\Cake;
+use App\Models\Recipe;
 class RecipeController extends Controller
 {
 
@@ -28,9 +29,10 @@ class RecipeController extends Controller
     public function store(Request $request)
     {
         //新規登録
-        $cake = Cake::create([
+        // dd($request->name);
+;        $cake = Cake::create([
             'name' => $request->name,
-            'price' => 0, //ingから計算する
+            'raw_price' => 0, //ingから計算する
             'number' => 0,
         ]);
         
@@ -43,6 +45,38 @@ class RecipeController extends Controller
                 'amount' => $request->amount[$index],
             ]);
         }
+        
+        // dd($cake->id);//
+        
+        $recipes = Recipe::Where('cake_id',$cake->id)->get();
+        $ing_ids = $recipes->pluck('ingredient_id');
+        
+        // dd($ing_ids);
+        $ingredients = Ingredients::Where('id', $ing_id)->get();
+        // dump($ingredients);
+        $result = 0;
+        foreach($recipes as $recipe) {
+            foreach($ingredients as $ingredient) {
+            // $ing_ids = $recipe->pluck('ingredient_id')->contains($ingredient->id);
+            $recipes_ing_id = $recipe->ingredient_id;
+            $ing_id = $ingredient->pluck('id');
+            dump($recipes_ing_id,$ing_id);
+
+            if($ing_id->contains($recipes_ing_id)) {
+                dump($result += $recipe->amount * $ingredient->g_price);
+                dump($result);
+            }
+            
+                
+            }
+        }
+        
+        
+        // $ing_price = $recipe->ingredient_id;
+        // dd($recipe, $ing_price);
+        
+        // $cake_ids = Recipe::all()->sortBy('cake_id')->pluck('cake_id');
+        // dd($cake_ids);
         
         //priceを計算し、update
         //トランザクション

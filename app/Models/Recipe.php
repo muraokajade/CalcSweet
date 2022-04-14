@@ -15,10 +15,10 @@ class Recipe extends Model
     [
         'cake_id',
         'ingredient_id',
-        'ing_name',
+        // 'ing_name',
         'amount',
-        'number',
-        'raw_price',
+        // 'number',
+        // 'raw_price',
     ];
 
     public function ingredients() {

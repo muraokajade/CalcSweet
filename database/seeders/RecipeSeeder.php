@@ -15,25 +15,25 @@ class RecipeSeeder extends Seeder
             [
                 'cake_id' => 1,
                 'ingredient_id' => 1,
-                'name' => 'チョコ',
+                // 'name' => 'チョコ',
                 'amount' => 200,
                 // 'number' => 30,
                 // 'price'は要りません//リレーションでとってくる
  
             ],
             [
-                'cake_id' => 2,
+                'cake_id' => 1,
                 'ingredient_id' => 1,
-                'name' => 'チョコ',
+                // 'name' => 'チョコ',
                 'amount' => 200,
                 // 'number' => 30,
                 // 'price'は要りません//リレーションでとってくる
  
             ],
             [
-                'cake_id' => 3,
+                'cake_id' => 1,
                 'ingredient_id' => 1,
-                'name' => 'チョコ',
+                // 'name' => 'チョコ',
                 'amount' => 200,
                 // 'number' => 30,
                 // 'price'は要りません//リレーションでとってくる

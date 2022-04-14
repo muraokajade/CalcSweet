@@ -44,7 +44,7 @@
                                 class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
 
                             @forelse ($ingredients as $ingretient)
-                                <input type="hidden" name="price" value="{{ $ingredient->price }}">
+                                <input type="hidden" name="price" value="{{ $ingredient->g_price }}">
                             @empty
                                 <p>登録なし</p>
                             @endforelse
@@ -53,8 +53,8 @@
                         </div>
 
                         
-                        <!--<input type="number" name="number" placeholder="取れ数"-->
-                        <!--    class="mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">-->
+                        <input type="number" name="number" placeholder="取れ数"
+                            class="mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <button
                             class="text-white font-bold py-2 px-4 mt-5 uppercase rounded-3xl bg-green-500 hover:bg-green-600 shadow hover:shadow-lg  transition transform hover:-translate-y-0.5">
                             作成
