@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ingredients', function (Blueprint $table) {
             $table->id();
-            $table->boolean('status')->nullable();
+            $table->foreignId('cake_id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->integer('price');
             $table->integer('weight');

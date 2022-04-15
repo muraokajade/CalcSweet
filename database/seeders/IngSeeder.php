@@ -18,9 +18,10 @@ class IngSeeder extends Seeder
 
         DB::table('ingredients')->insert([
             [
+                'cake_id' => 1,
                 'name' => '砂糖',
                 'price' => '10000',
-                'status' => true,
+                // 'status' => true,
                 // 'unit' => 'guramu',
                 'weight' => '1000',
                 'g_price' => '100',
@@ -29,9 +30,10 @@ class IngSeeder extends Seeder
 
             ],
             [
+                'cake_id' => 1,
                 'name' => '小麦',
                 'price' => '20000',
-                'status' => true,
+                // 'status' => true,
                 // 'unit' => 'guramu',
                 'weight' => '1000',
                 'g_price' => '100',
@@ -40,9 +42,34 @@ class IngSeeder extends Seeder
 
             ],
             [
+                'cake_id' => 1,
                 'name' => '生クリーム',
                 'price' => '10000',
-                'status' => true,
+                // 'status' => true,
+                // 'unit' => 'guramu',
+                'weight' => '1000',
+                'g_price' => '100',
+                'p_date' => '2022-05-19',
+                'p_camp' => '村岡さんの',
+
+            ],
+            [
+                'cake_id' => 3,
+                'name' => '生クっfsdリーム',
+                'price' => '10000',
+                // 'status' => true,
+                // 'unit' => 'guramu',
+                'weight' => '1000',
+                'g_price' => '100',
+                'p_date' => '2022-05-19',
+                'p_camp' => '村岡さんの',
+
+            ],
+            [
+                'cake_id' => 2,
+                'name' => '生dsfdsfクリーム',
+                'price' => '10000',
+                // 'status' => true,
                 // 'unit' => 'guramu',
                 'weight' => '1000',
                 'g_price' => '100',

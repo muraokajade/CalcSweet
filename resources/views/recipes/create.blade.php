@@ -27,31 +27,31 @@
 
                         <input type="text" name="name" placeholder="お菓子名"
                             class="mt-1 w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        <div id="form_list" class="flex justify-around mt-5 ">
-                            <input type="text" id="search" placeholder="検索"
-                                class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <select name="ing_id[]" placeholder="選択して下さい" id="ing_list"
-                                class="mt-1 w-96 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option selected>▼材料を選択してください</option>
-                                @forelse($ingredients as $ingredient)
-                                    <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>
-                                @empty
-                                    <p>材料が見つかりません</p>
-                                @endif
-                            </select>
+                        <!--<div id="form_list" class="flex justify-around mt-5 ">-->
+                        <!--    <input type="text" id="search" placeholder="検索"-->
+                        <!--        class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">-->
+                        <!--    <select name="ing_id[]" placeholder="選択して下さい" id="ing_list"-->
+                        <!--        class="mt-1 w-96 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">-->
+                        <!--        <option selected>▼材料を選択してください</option>-->
+                        <!--        @forelse($ingredients as $ingredient)-->
+                        <!--            <option value="{{ $ingredient->id }}">{{ $ingredient->name }}</option>-->
+                        <!--        @empty-->
+                        <!--            <p>材料が見つかりません</p>-->
+                        <!--        @endif-->
+                        <!--    </select>-->
 
-                            <input type="number" name="amount[]" placeholder="配合量" id="amount"
-                                class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <!--    <input type="number" name="amount[]" placeholder="配合量" id="amount"-->
+                        <!--        class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">-->
 
-                            @forelse ($ingredients as $ingretient)
-                                <input type="hidden" name="price" value="{{ $ingredient->g_price }}">
-                            @empty
-                                <p>登録なし</p>
-                            @endforelse
+                        <!--    @forelse ($ingredients as $ingretient)-->
+                        <!--        <input type="hidden" name="price" value="{{ $ingredient->g_price }}">-->
+                        <!--    @empty-->
+                        <!--        <p>登録なし</p>-->
+                        <!--    @endforelse-->
 
-                            <button class="bg-gray-200 rounded p-2">削除</button>
-                        </div>
+                        <!--</div>-->
 
+                        
                         
                         <input type="number" name="number" placeholder="取れ数"
                             class="mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">

@@ -6,14 +6,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        //
+        $cakes = Cake::all();
+        // dd($cakes);
+        return view('products.index',compact('cakes'));
     }
 
     /**

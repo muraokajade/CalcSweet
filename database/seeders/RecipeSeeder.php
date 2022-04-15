@@ -16,7 +16,7 @@ class RecipeSeeder extends Seeder
                 'cake_id' => 1,
                 'ingredient_id' => 1,
                 // 'name' => 'チョコ',
-                'amount' => 200,
+                'amount' => 100,
                 // 'number' => 30,
                 // 'price'は要りません//リレーションでとってくる
  
@@ -34,7 +34,7 @@ class RecipeSeeder extends Seeder
                 'cake_id' => 1,
                 'ingredient_id' => 1,
                 // 'name' => 'チョコ',
-                'amount' => 200,
+                'amount' => 300,
                 // 'number' => 30,
                 // 'price'は要りません//リレーションでとってくる
  

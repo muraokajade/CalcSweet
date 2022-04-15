@@ -27,7 +27,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('/ingredients', IngController::class);
 Route::resource('/recipes', RecipeController::class);
-Route::resource('/products', ProductController::class);
 Route::resource('/cakes', CakeController::class);
+Route::resource('/products', ProductController::class);
 
 require __DIR__.'/auth.php';

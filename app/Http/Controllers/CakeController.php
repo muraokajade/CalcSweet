@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cake;
+use App\Models\Recipe;
+use App\Models\Ingredients;
 use Illuminate\Http\Request;
 
 class CakeController extends Controller
@@ -21,57 +23,46 @@ class CakeController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    
+    // まず、材料があるケーキに使われているかチェックする、
+    // Cakeモデルのメソッド isUsedByBy を作成します。
+    public function isUsedBy($id) {
+        $cake = Cake::findOrfail($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+    public function show($id)
+    {
+        $cake = Cake::findOrfail($id);
+        $ingredients = $cake->Ingredients;
+        $recipes = '';
+        foreach ($ingredients as $ingredient) {
+        $recipes = Recipe::Where('cake_id', $cake->id && 'ingredient_id', $ingredient->id)->get();
+        }
+        // dd($recipes);
+        
+        return view('cakes.show', $cake, compact('cake', 'ingredients', 'recipes'));
+        
+        
+    }
+
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         //

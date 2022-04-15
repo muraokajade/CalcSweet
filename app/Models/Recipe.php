@@ -15,17 +15,15 @@ class Recipe extends Model
     [
         'cake_id',
         'ingredient_id',
-        // 'ing_name',
         'amount',
-        // 'number',
-        // 'raw_price',
+
     ];
 
     public function ingredients() {
-        return $this->hasMany(Ingredients::class);
+        return $this->belongsTo(Ingredients::class);
     }
 
-    public function cakes() {
-        return $this->hasOne(Cake::class);
+    public function cake() {
+        return $this->belongsTo(Cake::class);
     }
 }

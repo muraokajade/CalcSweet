@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
         <div class="sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="md:p-6 bg-white border-b border-gray-200">
@@ -13,7 +12,8 @@
                   <section class="text-gray-600 body-font">
                     <div class="md:px-5 ">
                       <x-flash-message status="session('status')" />
-                      <div class="w- overflow-auto">
+                      <h1 class="w-2/3 mx-auto text-3xl text-center mb-4 text-center p-2 text-3xl rounded-xl border-b mb-3 bg-gradient-to-r from-teal-200 to-blue-300">原材料一覧</h1>
+                      <div class="overflow-auto">
                         <table class="table-auto w-full text-left whitespace-no-wrap">
                           <thead>
                             <tr>
@@ -63,7 +63,6 @@
                 </div>
             </div>
         </div>
-    </div>
   <script>
     function deletePost(e) {
         'use strict';
