@@ -41,17 +41,17 @@
                                                         @forelse($ingredients as $key=>$ingredient)
                                                         <tr>
                                                         <td class="text-center border-2">{{$ingredient["name"]}}</td>
-                                                        @forelse($recipes as $recipe)
-                                                        <td class="text-center border-2">{{$recipe->amount}}</td>
                                                          @empty
                                                         <p>から</p>
                                                         @endif
+                                                        @forelse($recipes as $recipe)
+                                                        <td class="text-center border-2">{{$recipe->amount}}</td>
+                                                        
                                                         
                                                         @empty
                                                         <p>から</p>
                                                         @endif
-                                                    
-                                                        </tr>
+                                                        
                                                         <td class="text-center border-2 p-2">
                                                         <form id="edit_{{ $cake->id }}" method="get"
                                                             action="{{ route('cakes.edit', ['cake' => $cake->id])}}">
@@ -63,6 +63,8 @@
                                                             </a>
                                                         </form>
                                                         </td>
+                                                    
+                                                        </tr>
                                                 </tr>
                                                     
                                                      

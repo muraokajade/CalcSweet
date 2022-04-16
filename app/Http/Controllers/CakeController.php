@@ -38,11 +38,13 @@ class CakeController extends Controller
     public function show($id)
     {
         $cake = Cake::findOrfail($id);
+        var_dump($cake);
         $ingredients = $cake->Ingredients;
-        $recipes = '';
-        foreach ($ingredients as $ingredient) {
-        $recipes = Recipe::Where('cake_id', $cake->id && 'ingredient_id', $ingredient->id)->get();
-        }
+        // $recipes = '';
+        // //取り出し方
+        // foreach ($ingredients as $ingredient) {
+        // $recipes = Recipe::Where('cake_id', $cake->id)->get();
+        // }
         // dd($recipes);
         
         return view('cakes.show', $cake, compact('cake', 'ingredients', 'recipes'));

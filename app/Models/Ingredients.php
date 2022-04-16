@@ -11,7 +11,7 @@ class Ingredients extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cake_id', 'name','price','weight','g_price', 'p_date','p_camp'];
+    protected $fillable = ['name','price','weight','g_price', 'p_date','p_camp'];
 
 
     public function recipes() {
