@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class CakeController extends Controller
 {
-
     public function index()
     {
         $cakes = Cake::all();
@@ -30,26 +29,19 @@ class CakeController extends Controller
     
     // まず、材料があるケーキに使われているかチェックする、
     // Cakeモデルのメソッド isUsedByBy を作成します。
-    public function isUsedBy($id) {
+    public function isUsedBy($id)
+    {
         $cake = Cake::findOrfail($id);
     }
 
 
     public function show($id)
     {
-        $cake = Cake::findOrfail($id);
-        var_dump($cake);
-        $ingredients = $cake->Ingredients;
-        // $recipes = '';
-        // //取り出し方
-        // foreach ($ingredients as $ingredient) {
-        // $recipes = Recipe::Where('cake_id', $cake->id)->get();
-        // }
-        // dd($recipes);
-        
-        return view('cakes.show', $cake, compact('cake', 'ingredients', 'recipes'));
+        $cake = Cake::findOrFail($id); //レシピモデル
+        $recipes = $cake->recipes;//変更　hasManyを使用
         
         
+        return view('cakes.show', compact('cake', 'recipes'));
     }
 
 

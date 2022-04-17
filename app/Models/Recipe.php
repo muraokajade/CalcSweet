@@ -19,11 +19,13 @@ class Recipe extends Model
 
     ];
 
-    public function ingredients() {
+    public function ingredient()
+    {
         return $this->belongsTo(Ingredients::class);
     }
 
-    public function cake() {
+    public function cake()
+    {
         return $this->belongsTo(Cake::class);
     }
 }

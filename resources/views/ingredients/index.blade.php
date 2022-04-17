@@ -14,26 +14,26 @@
                       <x-flash-message status="session('status')" />
                       <h1 class="w-2/3 mx-auto text-3xl text-center mb-4 text-center p-2 text-3xl rounded-xl border-b mb-3 bg-gradient-to-r from-teal-200 to-blue-300">原材料一覧</h1>
                       <div class="overflow-auto">
-                        <table class="table-auto w-full text-left whitespace-no-wrap">
+                        <table class="table-auto w-full border-2 text-left whitespace-no-wrap">
                           <thead>
                             <tr>
-                              <th class="py-3 title-font tracking-wider font-medium text-gray-900 border-r bg-gray-100 ">原材料名</th>
-                              <th class="py-3 title-font tracking-wider font-medium text-gray-900 border-r bg-gray-100">価格</th>
-                              <th class="py-3 title-font tracking-wider font-medium text-gray-900 border-r bg-gray-100">荷姿(g)</th>
-                              <th class="py-3 title-font tracking-wider font-medium text-gray-900 border-r bg-gray-100 ">g等単価</th>
-                              <th class="py-3 title-font tracking-wider font-medium text-gray-900 border-r bg-gray-100 ">仕入れ日</th>
-                              <th class="py-3 title-font tracking-wider font-medium text-gray-900 border-r bg-gray-100 ">仕入先</th>
-                              <th class="py-3 title-font tracking-wider font-medium text-gray-900 border-r bg-gray-100 "></th>
+                              <th class="py-3 title-font text-center border-2 tracking-wider font-medium text-gray-900 bg-gray-100 ">原材料名</th>
+                              <th class="py-3 title-font text-center border-2 tracking-wider font-medium text-gray-900 bg-gray-100">価格</th>
+                              <th class="py-3 title-font text-center border-2 tracking-wider font-medium text-gray-900 bg-gray-100">荷姿(g)</th>
+                              <th class="py-3 title-font text-center border-2 tracking-wider font-medium text-gray-900 bg-gray-100 ">g等単価</th>
+                              <th class="py-3 title-font text-center border-2 tracking-wider font-medium text-gray-900 bg-gray-100 ">仕入れ日</th>
+                              <th class="py-3 title-font text-center border-2 tracking-wider font-medium text-gray-900 bg-gray-100 ">仕入先</th>
+                              <th class="py-3 title-font text-center border-2 tracking-wider font-medium text-gray-900 bg-gray-100 "></th>
                             </thead>
                           <tbody>
                             @foreach ($ingredients as $ingredient)
                             <tr class="border">
-                              <td class=" py-3">{{ $ingredient->name }}</td>
-                              <td class=" py-3">{{ $ingredient->price }}</td>
-                              <td class=" py-3">{{ $ingredient->weight }}</td>
-                              <td class=" py-3">{{ $ingredient->g_price }}</td>
-                              <td class=" py-3">{{ $ingredient->p_date }}</td>
-                              <td class=" py-3">{{ $ingredient->p_camp }}</td>
+                              <td class="text-center border-2 py-3">{{ $ingredient->name }}</td>
+                              <td class="text-center border-2 py-3">{{ $ingredient->price }}</td>
+                              <td class="text-center border-2 py-3">{{ $ingredient->weight }}</td>
+                              <td class="text-center border-2 py-3">{{ $ingredient->g_price }}</td>
+                              <td class="text-center border-2 py-3">{{ $ingredient->p_date }}</td>
+                              <td class="text-center border-2 py-3">{{ $ingredient->p_camp }}</td>
                               <td>編集</td>
                             </tr>
                             @endforeach

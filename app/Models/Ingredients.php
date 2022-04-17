@@ -18,17 +18,13 @@ class Ingredients extends Model
         return $this->hasMany(Recipe::class);
     }
     
-    public function cakes() {
+    public function createCakes() {
         return $this->belongsToMany(Cake::class,'recipes');
     }
     
-
-    public function usedIngredients() {
-        return $this->belongsToMany(Cake::class, 'recipes');
-    }
     
     public function isUsedBy($cake) {
-        $used_ingresient_ids = $this->usedIngredients->pluck('id');
+        $used_ingresient_ids = $this->createCakes->pluck('id');
         return $result = $used_ingresient_ids->contains($cake->id);
     }
 }

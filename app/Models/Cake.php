@@ -17,9 +17,6 @@ class Cake extends Model
         return $this->hasMany(Recipe::class);
     }
     
-    public function Ingredients() {
-        return $this->hasMany(Ingredients::class);
-    }
     
 
     public function usedIngredients() {
