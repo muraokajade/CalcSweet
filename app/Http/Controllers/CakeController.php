@@ -27,13 +27,15 @@ class CakeController extends Controller
         //
     }
     
-    // まず、材料があるケーキに使われているかチェックする、
-    // Cakeモデルのメソッド isUsedByBy を作成します。
-    public function isUsedBy($id)
+    public function storePrices(Request $request)
     {
-        $cake = Cake::findOrfail($id);
+        Cake::find($request->id)->update([
+            'sell_price' => $request->sell_price,
+            'benefit' => $request->benefit,
+            ]);
+        return redirect()->route('cakes.index')
+         ->with(['message' => '販売価格と粗利率を登録しました', 'status' => 'info']);
     }
-
 
     public function show($id)
     {

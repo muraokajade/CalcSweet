@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CakeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Select2Dropdown;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,7 @@ Route::get('/dashboard', function () {
 Route::resource('/ingredients', IngController::class);
 Route::resource('/recipes', RecipeController::class);
 Route::resource('/cakes', CakeController::class);
+Route::post('/storePrices', [CakeController::class, 'storePrices']);
 Route::resource('/products', ProductController::class);
 
 require __DIR__.'/auth.php';

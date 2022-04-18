@@ -10,22 +10,24 @@ use App\Models\Recipe;
 class Cake extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','ingredient_id','ing_name','amount','number','raw_price'];
+    protected $fillable = ['name','number','raw_price','sell_price','benefit'];
 
 
-    public function recipes() {
+    public function recipes()
+    {
         return $this->hasMany(Recipe::class);
     }
     
     
 
-    public function usedIngredients() {
+    public function usedIngredients()
+    {
         return $this->belongsToMany(Ingredients::class, 'recipes');
     }
     
-    public function isUsedBy($ingredient) {
+    public function isUsedBy($ingredient)
+    {
         $used_ingresient_ids = $this->usedIngredients->pluck('id');
         return $result = $used_ingresient_ids->contains($ingredient->id);
     }
-
 }

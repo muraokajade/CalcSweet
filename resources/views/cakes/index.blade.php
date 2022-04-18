@@ -11,7 +11,7 @@
                     <x-flash-message status="session('status')" />
                         <div class="mx-auto">
                             <div class="flex flex-col text-center w-full mb-20">
-                                <h1 class="w-2/3 mx-auto text-3xl text-center mb-4 text-center p-2 text-3xl rounded-xl border-b mb-3 bg-gradient-to-r from-teal-200 to-blue-300">ケーキ一覧</h1>
+                                <h1 class="w-2/3 mx-auto text-3xl text-center mb-4 text-center p-2 text-3xl rounded-xl border-b mb-3 bg-gradient-to-r from-teal-200 to-blue-300">ケーキ一覧&価格</h1>
                                 <div class="w-full mx-auto overflow-auto">
                                     <table class="table-auto w-full text-left whitespace-no-wrap">
                                         <thead>
@@ -19,7 +19,7 @@
                                                 <th
                                                     class="ptitle-font text-center tracking-wider border-2 font-medium text-gray-900 text-2xl leading-none bg-gray-100 rounded-tl rounded-bl">
                                                     ケーキ名</th>
-
+                                                <x-micromodal id="message" />
                                                 <!--<th-->
                                                 <!--    class=" title-font text-center tracking-wider border-2 font-medium text-gray-900  text-2xl leading-none bg-gray-100">-->
                                                 <!--    取れ数</th>-->
@@ -123,7 +123,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const storePrices = (cake_id,sell_price,benefit) => {
-            console.log(progress);
+            console.log(sell_price);
             $.ajax({
                 url: '/storePrices',
                 method: 'POST',
@@ -137,6 +137,9 @@
                 },
                 success: function(data) {
                     console.log(data)
+                    $('.storeprice').click(function() {
+                        $('#message').toggle();
+                    });
                 },
                 error: function() {
                     console.log('error')
@@ -152,21 +155,20 @@
            //let sample = $('#sell_price_1');
            //console.log(sample.val());
            let storeData = $('button[type="button"][data-id="'+ cake_id +'"]');//それぞれのボタンを指定
-           let price = 0;
-           let benefit = 0;
+           let selll_price;
+           let benefit;
            prices.each((index,element) => {
                 if(prices.eq(index).data('id') == cake_id) {
-                    let price = $('[id=sell_price_' + cake_id + ']').val();//input要素の可変id
-                    let benefit = $('[id=benefit_' + cake_id + ']').val();
-                    console.log(benefit);
-                    console.log(price);
-                    console.log(cake_id);
+                    sell_price = $('[id=sell_price_' + cake_id + ']').val();//input要素の可変id
+                    console.log(sell_price);
                 }
-                    console.log(benefit);
-                    console.log(price);
-                    console.log(cake_id);
-                
            });
+           benefits.each((index,element) => {
+                if(benefits.eq(index).data('id') == cake_id) {
+                    benefit = $('[id=benefit_' + cake_id + ']').val();
+                }
+           });
+           storePrices(cake_id,sell_price,benefit);
            
         });
     </script>

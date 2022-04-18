@@ -35,6 +35,8 @@ class RecipeController extends Controller
                 $cake = Cake::create([
                 'name' => $request->name,
                 'raw_price' => 0, //ingから計算する
+                'sell_price'=>0,
+                'benefit' => 0,
                 'number' => $request->number,
             ]);
                 foreach ($request->ing_id as $index=>$ing_id) {
