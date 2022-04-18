@@ -19,7 +19,7 @@
                                                 <th
                                                     class="ptitle-font text-center tracking-wider border-2 font-medium text-gray-900 text-2xl leading-none bg-gray-100 rounded-tl rounded-bl">
                                                     ケーキ名</th>
-                                                <x-micromodal id="message" />
+                                                <x-micromodal  />
                                                 <!--<th-->
                                                 <!--    class=" title-font text-center tracking-wider border-2 font-medium text-gray-900  text-2xl leading-none bg-gray-100">-->
                                                 <!--    取れ数</th>-->
@@ -56,14 +56,16 @@
                                                     <td class="text-center border-2 sell_price"
                                                     data-id="{{$cake->id}}"><input type="number" title="sell_price"
                                                     class="mt-1 w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                    data-id="{{$cake->id}}" id="sell_price_{{$cake->id}}" name="sell_price" value=""></td>
+                                                    data-id="{{$cake->id}}" id="sell_price_{{$cake->id}}" name="sell_price" value="{{$cake->sell_price}}"></td>
                                                     <td class="text-center border-2 benefit" 
                                                     data-id="{{$cake->id}}"><input type="number" title="benefit" 
                                                     class="mt-1 w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                                    data-id="{{$cake->id}}" id="benefit_{{$cake->id}}" name="benefit" value=""></td>
+                                                    data-id="{{$cake->id}}" id="benefit_{{$cake->id}}" name="benefit" value="{{$cake->benefit}}"></td>
+                                                    
                                                     <td class="text-center border-2 p-2">
+                                                        <button type="button" data-id="{{$cake->id}}" class="m-2 p-2 whitespace-nowrap text-white bg-gray-400 focus:outline-none hover:bg-gray-600 rounded hidden kaizyo">解除</button>
                                                         <button type="button" data-id="{{$cake->id}}" class="storeprice m-2 p-2 whitespace-nowrap text-white bg-indigo-400 focus:outline-none hover:bg-indigo-600 rounded">登録</button>
-                                                        </td>
+                                                    </td>
                                                     <td class="text-center border-2 p-2">
                                                     <form id="show_{{ $cake->id }}" method="get"
                                                         action="{{ route('cakes.show', ['cake' => $cake->id])}}">
@@ -123,7 +125,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         const storePrices = (cake_id,sell_price,benefit) => {
-            console.log(sell_price);
+            //console.log(sell_price);
             $.ajax({
                 url: '/storePrices',
                 method: 'POST',
@@ -131,15 +133,14 @@
                     id: cake_id,
                     sell_price: sell_price,
                     benefit: benefit,
+                    status: status,
                 },
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    console.log(data)
-                    $('.storeprice').click(function() {
-                        $('#message').toggle();
-                    });
+                    //console.log(data)
+                    alert('登録しました');
                 },
                 error: function() {
                     console.log('error')
@@ -152,12 +153,11 @@
            let cake_id = e.currentTarget.dataset.id;
            let prices = $('[id^=sell_price_]');
            let benefits = $('[id^=benefit_]');
-           //let sample = $('#sell_price_1');
-           //console.log(sample.val());
            let storeData = $('button[type="button"][data-id="'+ cake_id +'"]');//それぞれのボタンを指定
            let selll_price;
            let benefit;
            prices.each((index,element) => {
+                status = 1;
                 if(prices.eq(index).data('id') == cake_id) {
                     sell_price = $('[id=sell_price_' + cake_id + ']').val();//input要素の可変id
                     console.log(sell_price);
@@ -168,9 +168,29 @@
                     benefit = $('[id=benefit_' + cake_id + ']').val();
                 }
            });
-           storePrices(cake_id,sell_price,benefit);
+           //console.log(sell_price);
+           storePrices(cake_id,sell_price,benefit,status);
            
         });
+        
+        
+        const registeredPrice = () => {
+            //inputをdisableにして色を変える
+            $('.storeprice').on('click', (e) => {
+                let tr = e.target.parentElement.parentElement;
+                let input1 = tr.querySelector('input[type="number"][title="benefit"]');
+                let input2 = tr.querySelector('input[type="number"][title="sell_price"]');
+                input1.classList.add('disabled', 'bg-gray-200','text-gray-500');
+                input1.setAttribute('disabled', 'true');
+                input2.classList.add('disabled', 'bg-gray-200', 'text-gray-500');
+                input2.setAttribute('disabled', 'true');
+                let button1 = tr.querySelector('.storeprice');
+                button1.classList.add('hidden');
+                let button2 = tr.querySelector('.kaizyo');
+                button2.classList.remove('hidden');
+            });
+        }
+        registeredPrice();
     </script>
     
 </x-app-layout>
