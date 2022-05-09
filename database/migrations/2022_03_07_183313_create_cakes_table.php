@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->double('sell_price', 7, 2)->default(0);
             $table->double('benefit', 5, 2)->default(0);
             $table->integer('number');
+            $table->integer('status')->default(0);
             $table->timestamps();
         });
     }

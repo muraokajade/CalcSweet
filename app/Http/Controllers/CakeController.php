@@ -32,9 +32,8 @@ class CakeController extends Controller
         Cake::find($request->id)->update([
             'sell_price' => $request->sell_price,
             'benefit' => $request->benefit,
+            'status' => $request->status,
             ]);
-        return redirect()->route('cakes.index')
-         ->with(['message' => '販売価格と粗利率を登録しました', 'status' => 'info']);
     }
 
     public function show($id)

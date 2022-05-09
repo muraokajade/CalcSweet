@@ -37,6 +37,7 @@ class RecipeController extends Controller
                 'raw_price' => 0, //ingから計算する
                 'sell_price'=>0,
                 'benefit' => 0,
+                'status' => 0,
                 'number' => $request->number,
             ]);
                 foreach ($request->ing_id as $index=>$ing_id) {

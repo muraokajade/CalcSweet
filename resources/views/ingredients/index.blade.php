@@ -14,7 +14,8 @@
                       <x-flash-message status="session('status')" />
                       <h1 class="w-2/3 mx-auto text-3xl text-center mb-4 text-center p-2 text-3xl rounded-xl border-b mb-3 bg-gradient-to-r from-teal-200 to-blue-300">原材料一覧</h1>
                       <div class="overflow-auto">
-                        <table class="table-auto w-full border-2 text-left whitespace-no-wrap">
+                         <input type="text" id="search"> <input class="p-2 bg-gray-200" type="button" value="絞り込む" id="button"> <input class="p-2  bg-gray-200" type="button" value="すべて表示" id="button2">
+                        <table id="result" class="table-auto w-full border-2 text-left whitespace-no-wrap mt-4">
                           <thead>
                             <tr>
                               <th class="py-3 title-font text-center border-2 tracking-wider font-medium text-gray-900 bg-gray-100 ">原材料名</th>
@@ -92,6 +93,27 @@
     });
 
 
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(function(){
+	$('#button').bind("click",function(){
+		let re = new RegExp($('#search').val());
+		$('#result tbody tr').each(function(){
+			let txt = $(this).find("td:eq(0)").html();
+			if(txt.match(re) != null){
+				$(this).show();
+			}else{
+				$(this).hide();
+			}
+		});
+	});
+
+	$('#button2').bind("click",function(){
+		$('#search').val('');
+		$('#result tr').show();
+	});
+});
 
     </script>
   </x-app-layout>

@@ -10,7 +10,7 @@ use App\Models\Recipe;
 class Cake extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','number','raw_price','sell_price','benefit'];
+    protected $fillable = ['name','number','raw_price','sell_price','benefit','status'];
 
 
     public function recipes()
