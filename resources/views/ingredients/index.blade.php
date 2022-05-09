@@ -39,35 +39,38 @@
                                             name="name" value="{{ $ingredient->price }}">
                                 </td>
                                 <td class="text-center border-2 ">
-                                         <input type="number" title="sell_price"
+                                         <input type="number" title="price"
                                             {{ $ingredient->status == 1 ? 'disabled' : '' }}
                                             class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                             data-id="{{ $ingredient->id }}" id="sell_price_{{ $ingredient->id }}"
                                             name="name" value="{{ $ingredient->weight }}">
                                 </td> 
                                <td class="text-center border-2 ">
-                                         <input type="number" title="sell_price"
+                                         <input type="number" title="weight"
                                             {{ $ingredient->status == 1 ? 'disabled' : '' }}
-                                            class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                            class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} weight mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                             data-id="{{ $ingredient->id }}" id="sell_price_{{ $ingredient->id }}"
                                             name="sell_price" value="{{ $ingredient->g_price }}">
                                 </td>  
                                
                               <td class="text-center border-2 py-3 edit">{{ $ingredient->p_date }}</td>
                               <td class="text-center border-2 py-3 edit">{{ $ingredient->p_camp }}</td>
-                              <td class="text-center border-2 py-3">
-                                  <button class="text-white text-center whitespace-nowrap bg-indigo-400 border-0 p-2 focus:outline-none hover:bg-indigo-600 rounded">
-                                      編集
-                                  </button></td>
+                              <td class="text-center border-2 p-2">
+                            <button type="button" data-id="{{ $ingredient->id }}"
+                                onclick="location.href=''"
+                                class="{{ $ingredient->status == 1 ? '' : 'hidden' }} m-2 p-2 whitespace-nowrap text-white bg-gray-400 focus:outline-none hover:bg-gray-600 rounded unlock">解除</button>
+                            <button type="button" data-id="{{ $ingredient->id }}"
+                                class="{{ $ingredient->status == 1 ? 'hidden' : '' }} storeprice m-2 p-2 whitespace-nowrap text-white bg-indigo-400 focus:outline-none hover:bg-indigo-600 rounded">登録</button>
+                        </td>
                             </tr>
                             @endforeach
                             <tr>
                                 <form  method="post" action="{{route('ingredients.store')}}">
                                 @csrf
                                     <td class="text-center"><input id="name" type="text" name="name" value=""></td>
-                                    <td class="text-center"><input id="price" type="number" name="price" value=""></td>
-                                    <td class="text-center"><input id="weight" type="number" name="weight" value=""></td>
-                                    <td class="text-center"><input id="g_price" type="text" step="0.01" name="g_price" value=""></td>
+                                    <td class="text-center"><input title="price" id="price" type="number" name="price" value=""></td>
+                                    <td class="text-center"><input title="weight" id="weight" type="number" name="weight" value=""></td>
+                                    <td class="text-center"><input title="g_price" id="g_price" type="text" step="0.01" name="g_price" value=""></td>
                                     <td class="text-center"><input type="date" name="p_date" value=""></td>
                                     <input type="hidden" name="status" value="0"></td>
                                     <td class="text-center">
@@ -110,12 +113,34 @@
         });
     });
     
+        let price_inputs = document.querySelectorAll('input[type="number"][title="price"]');
+            for (price_input of price_inputs) {
+                price_input.addEventListener('change', (e) => {
+                    let tr = e.target.parentElement.parentElement;
+                    let this_raw_price = parseFloat(tr.querySelector('.raw_price').textContent);
+                    let this_price = parseFloat(tr.querySelector('input[type="number"][title="price"]').value);
+                    let this_sell_price = tr.querySelector('input[type="number"][title="price"]');
+                    this_price.value = this_raw_price / (1 - this_price);
 
-        let editbutton = document.getElementById('editing');
-        editbutton.addEventListener('click',(e) => {
-            let td = document.querySelectorAll('.edit');
-            console.log(td);
-        });
+                });
+            }
+
+            let weight_inputs = document.querySelectorAll('input[type="number"][title="weight"]');
+            for (weight_input of weight_inputs) {
+                weight.addEventListener('change', (e) => {
+                    let tr = e.target.parentElement.parentElement;
+                    let this_weight = parseFloat(tr.querySelector('.weight').value);
+                    let this_price = parseFloat(tr.querySelector('input[type="number"][title="weight"]')
+                    .value);
+                    let g_price = tr.querySelector('input[type="number"][title="g_price]');
+                    g_price.value = this_price / this_weight;
+                    //this_weight.value = (this_price - this_raw_price) / this_sell_price;
+
+                });
+            }
+           
+
+      
 
 
     </script>
@@ -139,6 +164,97 @@
 		$('#result tr').show();
 	});
 });
+
+const updateIngprice = (ingredient_id, price, weight, status) => {
+                //console.log(sell_price);
+                $.ajax({
+                    url: '/updateIngprice',
+                    method: 'POST',
+                    data: {
+                        id: ingredient_id,
+                        price: price,
+                        weight: weight,
+                        status: status,
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(data) {
+                        console.log(data)
+                        //alert('登録しました');
+                    },
+                    error: function() {
+                        console.log('error')
+                    }
+                });
+            }
+
+            let button1 = $('.storeprice');
+            let button2 = $('.unlock');
+
+            button1.on('click', (e) => {
+                let ingredient_id = e.currentTarget.dataset.id;
+                let prices = $('[id^=price_]');
+                let weights = $('[id^=weight_]');
+                let storeData = $('button[type="button"][data-id="' + ingredient_id + '"]'); //それぞれのボタンを指定
+                let price;
+                let weight;
+                prices.each((index, element) => {
+                    status = 1;
+                    if (prices.eq(index).data('id') == ingredient_id) {
+                        price = $('[id=price_' + ingredient_id + ']').val(); //input要素の可変id
+                        console.log(price);
+                    }
+                });
+                weights.each((index, element) => {
+                    if (weights.eq(index).data('id') == ingredient_id) {
+                        weight = $('[id=weight_' + ingredient_id + ']').val();
+                    }
+                });
+                console.log(status);
+                updateIngprice(ingredient_id, price, weight, status);
+            });
+
+            button2.on(('click'), (e) => {
+                let ingredient_id = e.currentTarget.dataset.id;
+                let prices = $('[id^=price_]');
+                let weights = $('[id^=weight_]');
+                let storeData = $('button[type="button"][data-id="' + ingredient_id + '"]'); //それぞれのボタンを指定
+                let selll_price;
+                let weight;
+                prices.each((index, element) => {
+                    status = 0;
+                    if (prices.eq(index).data('id') == cake_id) {
+                        price = $('[id=price_' + cake_id + ']').val(); //input要素の可変id
+                        console.log(price);
+                    }
+                });
+                weights.each((index, element) => {
+                    if (weights.eq(index).data('id') == cake_id) {
+                        weight = $('[id=weight_' + cake_id + ']').val();
+                    }
+                });
+                console.log(status);
+                updateIngprice(cake_id, price, weight, status);
+            });
+            const registeredPrice = () => {
+            //inputをdisableにして色を変える
+            $('.storeprice').on('click', (e) => {
+                let tr = e.target.parentElement.parentElement;
+                let input1 = tr.querySelector('input[type="number"][title="weight"]');
+                let input2 = tr.querySelector('input[type="number"][title="price"]');
+                input1.classList.add('disabled', 'bg-gray-200','text-gray-500');
+                input1.setAttribute('disabled', 'true');
+                input2.classList.add('disabled', 'bg-gray-200', 'text-gray-500');
+                input2.setAttribute('disabled', 'true');
+                let button1 = tr.querySelector('.storeprice');
+                button1.classList.add('hidden');
+                let button2 = tr.querySelector('.unlock');
+                button2.classList.remove('hidden');
+            });
+        }
+        registeredPrice();
+
 
     </script>
   </x-app-layout>

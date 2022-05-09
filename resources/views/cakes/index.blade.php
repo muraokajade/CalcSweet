@@ -109,7 +109,6 @@
             }
 
             let benefit_inputs = document.querySelectorAll('input[type="number"][title="benefit"]');
-            //.log(inputs);
             for (benefit_input of benefit_inputs) {
                 benefit_input.addEventListener('change', (e) => {
                     let tr = e.target.parentElement.parentElement;
@@ -153,8 +152,8 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function(data) {
-                        //console.log(data)
-                        alert('登録しました');
+                        console.log(data)
+                        //alert('登録しました');
                     },
                     error: function() {
                         console.log('error')

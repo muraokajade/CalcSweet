@@ -31,5 +31,6 @@ Route::resource('/recipes', RecipeController::class);
 Route::resource('/cakes', CakeController::class);
 Route::post('/storePrices', [CakeController::class, 'storePrices']);
 Route::resource('/products', ProductController::class);
+Route::post('/updateIngprice', [IngController::class, 'updateIngprice']);
 
 require __DIR__.'/auth.php';

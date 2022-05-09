@@ -19,6 +19,7 @@ class IngController extends Controller
         //
     }
 
+    
 
     public function store(Request $request)
     {
@@ -38,12 +39,12 @@ class IngController extends Controller
         ->with(['message' => '材料を追加しました', 'status' => 'info']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function updateIngprice(Request $request)
+    {
+    }
+    
+    
     public function show($id)
     {
         //
