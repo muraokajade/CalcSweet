@@ -12,6 +12,7 @@ showブレード作成--未完
 逆もまた然りで、作る（分析）
 
 モーダル
+
 disabled
 それの解除
 ajax成功->モーダル→価格disabled→再編集もできる
@@ -20,4 +21,7 @@ ajax成功->モーダル→価格disabled→再編集もできる
 
 
 これをProductテーブルに入れるかな？
+
+
+SQLSTATE[HY000]: General error: 1364 Field 'status' doesn't have a default value
 

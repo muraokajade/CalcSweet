@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class IngController extends Controller
 {
-
     public function index()
     {
         $ingredients = Ingredients::all();
@@ -23,7 +22,7 @@ class IngController extends Controller
 
     public function store(Request $request)
     {
-        $g_price = round($request->g_price,2);
+        $g_price = round($request->g_price, 2);
 
         Ingredients::create([
             'name' => $request->name,
@@ -32,6 +31,7 @@ class IngController extends Controller
             'g_price' => $g_price,
             'p_date' => $request->p_date,
             'p_camp' => $request->p_camp,
+            'status' => 0,
         ]);
 
         return redirect()->route('ingredients.index')

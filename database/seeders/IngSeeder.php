@@ -15,13 +15,12 @@ class IngSeeder extends Seeder
      */
     public function run()
     {
-
         DB::table('ingredients')->insert([
             [
                 // 'cake_id' => 1,
                 'name' => '砂糖',
                 'price' => '10000',
-                // 'status' => true,
+                'status' => 0,
                 // 'unit' => 'guramu',
                 'weight' => '1000',
                 'g_price' => '100',
@@ -33,7 +32,7 @@ class IngSeeder extends Seeder
                 // 'cake_id' => 1,
                 'name' => '小麦',
                 'price' => '20000',
-                // 'status' => true,
+                'status' => 0,
                 // 'unit' => 'guramu',
                 'weight' => '1000',
                 'g_price' => '100',
@@ -45,7 +44,7 @@ class IngSeeder extends Seeder
                 // 'cake_id' => 1,
                 'name' => '生クリーム',
                 'price' => '10000',
-                // 'status' => true,
+                'status' => 0,
                 // 'unit' => 'guramu',
                 'weight' => '1000',
                 'g_price' => '100',
@@ -57,7 +56,7 @@ class IngSeeder extends Seeder
                 // 'cake_id' => 3,
                 'name' => '生クっfsdリーム',
                 'price' => '10000',
-                // 'status' => true,
+                'status' => 0,
                 // 'unit' => 'guramu',
                 'weight' => '1000',
                 'g_price' => '100',
@@ -69,7 +68,7 @@ class IngSeeder extends Seeder
                 // 'cake_id' => 2,
                 'name' => '生dsfdsfクリーム',
                 'price' => '10000',
-                // 'status' => true,
+                'status' => 0,
                 // 'unit' => 'guramu',
                 'weight' => '1000',
                 'g_price' => '100',
@@ -83,7 +82,5 @@ class IngSeeder extends Seeder
             
 
         ]);
-
-
     }
 }
