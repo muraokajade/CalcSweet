@@ -42,6 +42,13 @@ class IngController extends Controller
     
     public function updateIngprice(Request $request)
     {
+        Ingredients::find($request->id)->update([
+            'price' => $request->price,
+            'weight'=> $request->weight,
+            'g_price' => $request->g_price,
+            'status' => $request->status,
+            
+            ]);
     }
     
     

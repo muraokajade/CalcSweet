@@ -4,6 +4,7 @@ use App\Http\Controllers\IngController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CakeController;
+use App\Http\Controllers\Ajax\SelectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Select2Dropdown;
 
@@ -32,5 +33,8 @@ Route::resource('/cakes', CakeController::class);
 Route::post('/storePrices', [CakeController::class, 'storePrices']);
 Route::resource('/products', ProductController::class);
 Route::post('/updateIngprice', [IngController::class, 'updateIngprice']);
+Route::get('/getIngprice', [IngController::class, 'getIngprice']);
+Route::get('select2_ajax', [CakeController::class,'select2_ajax']);
+Route::get('ajax/ingredients', [SelectController::class, 'searchIngredients']);
 
 require __DIR__.'/auth.php';

@@ -71,8 +71,8 @@ class RecipeController extends Controller
                 $raw_price = $result / $count;
         
                 $cake->update([
-            'raw_price' => $raw_price,
-        ]);
+                    'raw_price' => $raw_price,
+                ]);
             }, 2);
         } catch (Throwable $e) {
             Log::error($e);

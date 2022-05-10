@@ -14,6 +14,9 @@
                         <h1
                             class="w-2/3 mx-auto text-3xl text-center mb-4 text-center p-2 text-3xl rounded-xl border-b mb-3 bg-gradient-to-r from-teal-200 to-blue-300">
                             ケーキ一覧&価格</h1>
+                        <div class="p-4 bg-white mr-auto">
+                            <a href="{{route('cakes.create')}}" class="text-white text-2xl font-bold bg-indigo-400 border-0 p-2 focus:outline-none hover:bg-indigo-600 rounded">ケーキを追加する</a>
+                        </div>
                         <div class="w-full mx-auto overflow-auto">
                            
                             <table class="table-auto w-full text-left whitespace-no-wrap">
@@ -22,7 +25,7 @@
                                         <th
                                             class="ptitle-font text-center tracking-wider border-2 font-medium text-gray-900 text-2xl leading-none bg-gray-100 rounded-tl rounded-bl">
                                             ケーキ名</th>
-                                        <x-micromodal />
+                                        
                                         <!--<th-->
                                         <!--    class=" title-font text-center tracking-wider border-2 font-medium text-gray-900  text-2xl leading-none bg-gray-100">-->
                                         <!--    取れ数</th>-->
@@ -41,11 +44,11 @@
 
                                         <th
                                             class="text-center title-font whitespace-nowrap tracking-wider border-2 font-medium text-gray-900 text-xl leading-none bg-gray-100 rounded-tr rounded-br">
-                                            作成
+                                            価格決定
                                         </th>
                                         <th
                                             class="text-center title-font whitespace-nowrap tracking-wider border-2 font-medium text-gray-900 text-xl leading-none bg-gray-100 rounded-tr rounded-br">
-                                            管理
+                                            レシピ管理
                                         </th>
                                     </tr>
                                 </thead>

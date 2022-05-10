@@ -32,25 +32,25 @@
                             <tr>
                                <td class="text-center border-2 ">{{$ingredient->name}}</td>  
                                <td class="text-center border-2 ">
-                                         <input type="text"
-                                            {{ $ingredient->status == 1 ? 'disabled' : '' }}
-                                            class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                            data-id="{{ $ingredient->id }}" id="sell_price_{{ $ingredient->id }}"
-                                            name="name" value="{{ $ingredient->price }}">
-                                </td>
-                                <td class="text-center border-2 ">
                                          <input type="number" title="price"
                                             {{ $ingredient->status == 1 ? 'disabled' : '' }}
                                             class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                            data-id="{{ $ingredient->id }}" id="sell_price_{{ $ingredient->id }}"
-                                            name="name" value="{{ $ingredient->weight }}">
-                                </td> 
-                               <td class="text-center border-2 ">
+                                            data-id="{{ $ingredient->id }}" id="price_{{ $ingredient->id }}"
+                                            name="price" value="{{ $ingredient->price }}">
+                                </td>
+                                <td class="text-center border-2 ">
                                          <input type="number" title="weight"
                                             {{ $ingredient->status == 1 ? 'disabled' : '' }}
                                             class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} weight mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                            data-id="{{ $ingredient->id }}" id="sell_price_{{ $ingredient->id }}"
-                                            name="sell_price" value="{{ $ingredient->g_price }}">
+                                            data-id="{{ $ingredient->id }}" id="weight_{{ $ingredient->id }}"
+                                            name="weight" value="{{ $ingredient->weight }}">
+                                </td> 
+                               <td class="text-center border-2 ">
+                                         <input type="number" title="g_price"
+                                            {{ $ingredient->status == 1 ? 'disabled' : '' }}
+                                            class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                            data-id="{{ $ingredient->id }}" id="g_price_{{ $ingredient->id }}"
+                                            name="g_price" value="{{ $ingredient->g_price }}">
                                 </td>  
                                
                               <td class="text-center border-2 py-3 edit">{{ $ingredient->p_date }}</td>
@@ -113,29 +113,27 @@
         });
     });
     
+    
+        const calcPrice = (e) => {
+            let tr = e.target.parentElement.parentElement;
+            let this_weight = parseFloat(tr.querySelector('.weight').value);
+            let this_price = parseFloat(tr.querySelector('input[type="number"][title="price"]').value);
+            let g_price = tr.querySelector('input[type="number"][title="g_price"]');
+            g_price.value = Math.round((this_price  / this_weight) * 100) / 100;
+            
+        }
+    
         let price_inputs = document.querySelectorAll('input[type="number"][title="price"]');
             for (price_input of price_inputs) {
-                price_input.addEventListener('change', (e) => {
-                    let tr = e.target.parentElement.parentElement;
-                    let this_raw_price = parseFloat(tr.querySelector('.raw_price').textContent);
-                    let this_price = parseFloat(tr.querySelector('input[type="number"][title="price"]').value);
-                    let this_sell_price = tr.querySelector('input[type="number"][title="price"]');
-                    this_price.value = this_raw_price / (1 - this_price);
-
+                price_input.addEventListener('input', (e) => {
+                    calcPrice(e);
                 });
             }
 
-            let weight_inputs = document.querySelectorAll('input[type="number"][title="weight"]');
+        let weight_inputs = document.querySelectorAll('input[type="number"][title="weight"]');
             for (weight_input of weight_inputs) {
-                weight.addEventListener('change', (e) => {
-                    let tr = e.target.parentElement.parentElement;
-                    let this_weight = parseFloat(tr.querySelector('.weight').value);
-                    let this_price = parseFloat(tr.querySelector('input[type="number"][title="weight"]')
-                    .value);
-                    let g_price = tr.querySelector('input[type="number"][title="g_price]');
-                    g_price.value = this_price / this_weight;
-                    //this_weight.value = (this_price - this_raw_price) / this_sell_price;
-
+                weight_input.addEventListener('input', (e) => {
+                    calcPrice(e);
                 });
             }
            
@@ -165,7 +163,7 @@
 	});
 });
 
-const updateIngprice = (ingredient_id, price, weight, status) => {
+const updateIngprice = (ingredient_id, price, weight, g_price, status) => {
                 //console.log(sell_price);
                 $.ajax({
                     url: '/updateIngprice',
@@ -174,6 +172,7 @@ const updateIngprice = (ingredient_id, price, weight, status) => {
                         id: ingredient_id,
                         price: price,
                         weight: weight,
+                        g_price: g_price,
                         status: status,
                     },
                     headers: {
@@ -185,6 +184,7 @@ const updateIngprice = (ingredient_id, price, weight, status) => {
                     },
                     error: function() {
                         console.log('error')
+                        console.log(ingredient_id, price, weight, g_price, status);
                     }
                 });
             }
@@ -192,15 +192,16 @@ const updateIngprice = (ingredient_id, price, weight, status) => {
             let button1 = $('.storeprice');
             let button2 = $('.unlock');
 
+
+
             button1.on('click', (e) => {
                 let ingredient_id = e.currentTarget.dataset.id;
                 let prices = $('[id^=price_]');
                 let weights = $('[id^=weight_]');
-                let storeData = $('button[type="button"][data-id="' + ingredient_id + '"]'); //それぞれのボタンを指定
+                let g_prices = $('[id^=g_price_]');
                 let price;
                 let weight;
                 prices.each((index, element) => {
-                    status = 1;
                     if (prices.eq(index).data('id') == ingredient_id) {
                         price = $('[id=price_' + ingredient_id + ']').val(); //input要素の可変id
                         console.log(price);
@@ -211,42 +212,56 @@ const updateIngprice = (ingredient_id, price, weight, status) => {
                         weight = $('[id=weight_' + ingredient_id + ']').val();
                     }
                 });
-                console.log(status);
-                updateIngprice(ingredient_id, price, weight, status);
+                g_prices.each((index, element) => {
+                    if (g_prices.eq(index).data('id') == ingredient_id ) {
+                        g_price = $('[id=g_price_' + ingredient_id  + ']').val();
+                    }
+                });
+                status = 1;
+                updateIngprice(ingredient_id, price, weight, g_price, status);
             });
 
-            button2.on(('click'), (e) => {
+            button2.on('click', (e) => {
                 let ingredient_id = e.currentTarget.dataset.id;
                 let prices = $('[id^=price_]');
                 let weights = $('[id^=weight_]');
-                let storeData = $('button[type="button"][data-id="' + ingredient_id + '"]'); //それぞれのボタンを指定
-                let selll_price;
+                let g_prices = $('[id^=g_price_]');
+                let price;
                 let weight;
+                let g_price;
                 prices.each((index, element) => {
-                    status = 0;
-                    if (prices.eq(index).data('id') == cake_id) {
-                        price = $('[id=price_' + cake_id + ']').val(); //input要素の可変id
+                    
+                    if (prices.eq(index).data('id') == ingredient_id ) {
+                        price = $('[id=price_' + ingredient_id + ']').val(); //input要素の可変id
                         console.log(price);
                     }
                 });
                 weights.each((index, element) => {
-                    if (weights.eq(index).data('id') == cake_id) {
-                        weight = $('[id=weight_' + cake_id + ']').val();
+                    if (weights.eq(index).data('id') == ingredient_id ) {
+                        weight = $('[id=weight_' + ingredient_id  + ']').val();
                     }
                 });
-                console.log(status);
-                updateIngprice(cake_id, price, weight, status);
+                g_prices.each((index, element) => {
+                    if (g_prices.eq(index).data('id') == ingredient_id ) {
+                        g_price = $('[id=g_price_' + ingredient_id  + ']').val();
+                    }
+                });
+                status = 0;
+                updateIngprice(ingredient_id, price, weight, g_price, status);
             });
             const registeredPrice = () => {
-            //inputをdisableにして色を変える
             $('.storeprice').on('click', (e) => {
-                let tr = e.target.parentElement.parentElement;
+                let tr = e.target.parentElement.parentElement
+                console.log(tr);
                 let input1 = tr.querySelector('input[type="number"][title="weight"]');
                 let input2 = tr.querySelector('input[type="number"][title="price"]');
+                let input3 = tr.querySelector('input[type="number"][title="g_price"]');
                 input1.classList.add('disabled', 'bg-gray-200','text-gray-500');
                 input1.setAttribute('disabled', 'true');
                 input2.classList.add('disabled', 'bg-gray-200', 'text-gray-500');
                 input2.setAttribute('disabled', 'true');
+                input3.setAttribute('disabled', 'true');
+                input3.classList.add('disabled', 'bg-gray-200', 'text-gray-500');
                 let button1 = tr.querySelector('.storeprice');
                 button1.classList.add('hidden');
                 let button2 = tr.querySelector('.unlock');

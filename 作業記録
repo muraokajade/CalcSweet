@@ -24,4 +24,8 @@ ajax成功->モーダル→価格disabled→再編集もできる
 
 
 SQLSTATE[HY000]: General error: 1364 Field 'status' doesn't have a default value
+A.他のカラムがずれていた。
 
+5/10
+indexのedit
+cakeのupdate（show画面)

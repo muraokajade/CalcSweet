@@ -19,9 +19,15 @@ class CakeController extends Controller
 
     public function create()
     {
-        //
+        $ingredients = Ingredients::all();
+        return view('cakes.create', compact('ingredients'));
     }
 
+    public function select2_ajax()
+    {
+        return view('select2_ajax');
+    }
+    
     public function store(Request $request)
     {
         //
