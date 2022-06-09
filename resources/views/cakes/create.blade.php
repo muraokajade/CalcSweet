@@ -26,7 +26,7 @@
                         @csrf
                         <input type="text" name="name" placeholder="お菓子名"
                             class="mt-1 w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                        
+
                         <input type="number" name="number" placeholder="取れ数"
                             class="mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                         <button
@@ -34,7 +34,7 @@
                             作成
                         </button>
                     </form>
-                    
+
 
 
                 </div>
@@ -44,6 +44,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
         //   それぞれの処理を確認しながら丁寧に書いていく!!!
 
         const createSearchBox = () => {
@@ -63,7 +64,7 @@
             let select = $('<select>');
             select.attr('name', 'ing_id[]');
             select.addClass(
-                'mt-1 w-96 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+                'mt-1 select w-96 block rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
             );
             let gradientsList = JSON.parse($('#ingredientsList').html());
             let options = createOptions();
@@ -105,7 +106,7 @@
             console.log(input.val());
             return input;
         }
-        
+
          const priceBox = () => {
             //inputを作る
             let input = $('<input>');
@@ -155,46 +156,6 @@
         });
 
 
-        /*
-        //コメントアウト
-        class ListChanger {
-            constructor(idName) {
-                this.selectBox = document.getElementById(idName);
-            }
-            change(value) {
-                const items = this.selectBox.children;
-                const reg = new RegExp(".*" + value + ".*", "i");
 
-                let i;
-
-                if (value === '') {
-                    for (i = 0; i < items.length; i++) {
-                        items[i].style.display = "";
-                    }
-                    return;
-                }
-
-                for (i = 0; i < items.length; i++) {
-                    if (items[i].textContent.match(reg)) {
-                        items[i].style.display = "";
-                    } else {
-                        items[i].style.display = "none";
-                    }
-                    items[i].selected = false;
-                }
-                // 選択状態にする
-                for (i = 0; i < this.selectBox.length; i++) {
-                    if (this.selectBox[i].textContent.match(reg)) {
-                        this.selectBox[i].selected = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        const menObj = new ListChanger('ing_list');
-        $("#search").on('input keyup  blur', function() {
-            menObj.change(this.value);
-        }); */
     </script>
 </x-app-layout>

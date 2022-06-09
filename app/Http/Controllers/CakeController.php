@@ -12,7 +12,7 @@ class CakeController extends Controller
     public function index()
     {
         $cakes = Cake::all();
-        
+
         return view('cakes.index', compact('cakes'));
     }
 
@@ -27,12 +27,12 @@ class CakeController extends Controller
     {
         return view('select2_ajax');
     }
-    
+
     public function store(Request $request)
     {
         //
     }
-    
+
     public function storePrices(Request $request)
     {
         Cake::find($request->id)->update([
@@ -46,9 +46,10 @@ class CakeController extends Controller
     {
         $cake = Cake::findOrFail($id); //レシピモデル
         $recipes = $cake->recipes;//変更　hasManyを使用
-        
-        
-        return view('cakes.show', compact('cake', 'recipes'));
+        $ingredients = Ingredients::all();
+
+
+        return view('cakes.show', compact('cake', 'recipes','ingredients'));
     }
 
 

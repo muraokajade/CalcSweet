@@ -12,9 +12,9 @@
                   <section class="text-gray-600 body-font">
                     <div class="md:px-5 ">
                       <x-flash-message status="session('status')" />
-                      <h1 class="w-2/3 mx-auto text-3xl text-center mb-4 text-center p-2 text-3xl rounded-xl border-b mb-3 bg-gradient-to-r from-teal-200 to-blue-300">原材料一覧</h1>
+                      <h1 class="w-2/3 mx-auto text-3xl text-center p-2 rounded-xl border-b mb-3 bg-gradient-to-r from-teal-200 to-blue-300">原材料一覧</h1>
                       <div class="overflow-auto">
-                         <input type="text" id="search"> <input class="p-2 bg-gray-200" type="button" value="絞り込む" id="button"> <input class="p-2  bg-gray-200" type="button" value="すべて表示" id="button2">
+                         <input type="text" id="search" class="mt-1 border-2  w-60 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"> <input class="p-2 bg-gray-200" type="button" value="絞り込む" id="button"> <input class="p-2  bg-gray-200" type="button" value="すべて表示" id="button2">
                         <button class="ml-2 text-white whitespace-nowrap bg-indigo-400 border-0 p-2 focus:outline-none hover:bg-indigo-600 rounded" id="editing" type="submit">変更</button>
                         <table id="result" class="table-auto w-full border-2 text-left whitespace-no-wrap mt-4">
                           <thead>
@@ -30,7 +30,7 @@
                           <tbody>
                             @foreach ($ingredients as $ingredient)
                             <tr>
-                               <td class="text-center border-2 ">{{$ingredient->name}}</td>  
+                               <td class="text-center border-2 ">{{$ingredient->name}}</td>
                                <td class="text-center border-2 ">
                                          <input type="number" title="price"
                                             {{ $ingredient->status == 1 ? 'disabled' : '' }}
@@ -44,15 +44,15 @@
                                             class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} weight mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                             data-id="{{ $ingredient->id }}" id="weight_{{ $ingredient->id }}"
                                             name="weight" value="{{ $ingredient->weight }}">
-                                </td> 
+                                </td>
                                <td class="text-center border-2 ">
                                          <input type="number" title="g_price"
                                             {{ $ingredient->status == 1 ? 'disabled' : '' }}
                                             class="{{ $ingredient->status == 1 ? 'bg-gray-200' : '' }} mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                             data-id="{{ $ingredient->id }}" id="g_price_{{ $ingredient->id }}"
                                             name="g_price" value="{{ $ingredient->g_price }}">
-                                </td>  
-                               
+                                </td>
+
                               <td class="text-center border-2 py-3 edit">{{ $ingredient->p_date }}</td>
                               <td class="text-center border-2 py-3 edit">{{ $ingredient->p_camp }}</td>
                               <td class="text-center border-2 p-2">
@@ -67,10 +67,10 @@
                             <tr>
                                 <form  method="post" action="{{route('ingredients.store')}}">
                                 @csrf
-                                    <td class="text-center"><input id="name" type="text" name="name" value=""></td>
-                                    <td class="text-center"><input title="price" id="price" type="number" name="price" value=""></td>
-                                    <td class="text-center"><input title="weight" id="weight" type="number" name="weight" value=""></td>
-                                    <td class="text-center"><input title="g_price" id="g_price" type="text" step="0.01" name="g_price" value=""></td>
+                                    <td class="text-center"><input id="name" type="text" name="name" value="" class="mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></td>
+                                    <td class="text-center"><input title="price" id="price" type="number" name="price" value="" class="mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></td>
+                                    <td class="text-center"><input title="weight" id="weight" type="number" name="weight" value="" class="mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></td>
+                                    <td class="text-center"><input title="g_price" id="g_price" type="text" step="0.01" name="g_price" value="" class="mt-1 border-2  w-60 block mx-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></td>
                                     <td class="text-center"><input type="date" name="p_date" value=""></td>
                                     <input type="hidden" name="status" value="0"></td>
                                     <td class="text-center">
@@ -112,17 +112,17 @@
 
         });
     });
-    
-    
+
+
         const calcPrice = (e) => {
             let tr = e.target.parentElement.parentElement;
             let this_weight = parseFloat(tr.querySelector('.weight').value);
             let this_price = parseFloat(tr.querySelector('input[type="number"][title="price"]').value);
             let g_price = tr.querySelector('input[type="number"][title="g_price"]');
             g_price.value = Math.round((this_price  / this_weight) * 100) / 100;
-            
+
         }
-    
+
         let price_inputs = document.querySelectorAll('input[type="number"][title="price"]');
             for (price_input of price_inputs) {
                 price_input.addEventListener('input', (e) => {
@@ -136,9 +136,9 @@
                     calcPrice(e);
                 });
             }
-           
 
-      
+
+
 
 
     </script>
@@ -230,7 +230,7 @@ const updateIngprice = (ingredient_id, price, weight, g_price, status) => {
                 let weight;
                 let g_price;
                 prices.each((index, element) => {
-                    
+
                     if (prices.eq(index).data('id') == ingredient_id ) {
                         price = $('[id=price_' + ingredient_id + ']').val(); //input要素の可変id
                         console.log(price);
